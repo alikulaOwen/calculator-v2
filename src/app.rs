@@ -29,13 +29,21 @@ pub fn App() -> impl IntoView {
         spawn_local(async move {
             let name = name.get_untracked();
             if name.is_empty() {
+                set_greet_msg.set("Please enter a name".to_string());
                 return;
             }
 
+            set_greet_msg.set("Loading...".to_string());
+
             let args = serde_wasm_bindgen::to_value(&GreetArgs { name: &name }).unwrap();
-            // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-            let new_msg = invoke("greet", args).await.as_string().unwrap();
-            set_greet_msg.set(new_msg);
+            match invoke("greet", args).await.as_string() {
+                Some(msg) => {
+                    set_greet_msg.set(msg);
+                }
+                None => {
+                    set_greet_msg.set("Error: Could not reach Tauri backend. Make sure to run with `cargo tauri dev`.".to_string());
+                }
+            }
         });
     };
 

@@ -7,7 +7,7 @@
   "scripts": {
     "build:css": "bun x tailwindcss -i styles.css -o styles.generated.css --minify",
     "watch:css": "bun x tailwindcss -i styles.css -o styles.generated.css --watch",
-    "dev": "bun run build:css && trunk serve",
-    "build": "bun run build:css && trunk build --release"
+    "dev": "bun run build:css && cargo tauri dev",
+    "build": "bun run build:css && cargo tauri build"
   }
 }
