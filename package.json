@@ -1,0 +1,13 @@
+{
+  "name": "calculator",
+  "private": true,
+  "devDependencies": {
+    "tailwindcss": "^3.4.4"
+  },
+  "scripts": {
+    "build:css": "bun x tailwindcss -i styles.css -o styles.generated.css --minify",
+    "watch:css": "bun x tailwindcss -i styles.css -o styles.generated.css --watch",
+    "dev": "bun run build:css && trunk serve",
+    "build": "bun run build:css && trunk build --release"
+  }
+}

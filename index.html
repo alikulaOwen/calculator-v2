@@ -3,9 +3,15 @@
   <head>
     <meta charset="utf-8" />
     <title>Tauri + Leptos App</title>
-    <link data-trunk rel="css" href="styles.css" />
+    <link data-trunk rel="css" href="styles.generated.css" />
     <link data-trunk rel="copy-dir" href="public" />
     <link data-trunk rel="rust" data-wasm-opt="z" />
   </head>
-  <body></body>
+  <body class="bg-slate-100 text-slate-900 min-h-screen">
+    <noscript>
+      <div class="p-6 text-center text-sm text-slate-600">
+        JavaScript is required to render this application.
+      </div>
+    </noscript>
+  </body>
 </html>

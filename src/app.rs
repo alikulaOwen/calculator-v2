@@ -40,28 +40,36 @@ pub fn App() -> impl IntoView {
     };
 
     view! {
-        <main class="container">
-            <h1>"Welcome to Tauri + Leptos"</h1>
+        <main class="mx-auto my-10 max-w-3xl rounded-3xl bg-white p-8 shadow-2xl shadow-slate-300/50 ring-1 ring-slate-200">
+            <div class="space-y-6">
+                <div class="text-center">
+                    <h1 class="text-4xl font-semibold text-slate-900">"Welcome to Tauri + Leptos"</h1>
+                    <p class="mt-3 text-slate-500">"Click on the Tauri and Leptos logos to learn more."</p>
+                </div>
 
-            <div class="row">
-                <a href="https://tauri.app" target="_blank">
-                    <img src="public/tauri.svg" class="logo tauri" alt="Tauri logo"/>
-                </a>
-                <a href="https://docs.rs/leptos/" target="_blank">
-                    <img src="public/leptos.svg" class="logo leptos" alt="Leptos logo"/>
-                </a>
+                <div class="flex flex-wrap justify-center gap-6">
+                    <a href="https://tauri.app" target="_blank" class="transform transition hover:-translate-y-1">
+                        <img src="public/tauri.svg" class="h-24" alt="Tauri logo"/>
+                    </a>
+                    <a href="https://docs.rs/leptos/" target="_blank" class="transform transition hover:-translate-y-1">
+                        <img src="public/leptos.svg" class="h-24" alt="Leptos logo"/>
+                    </a>
+                </div>
+
+                <form class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-center" on:submit=greet>
+                    <input
+                        id="greet-input"
+                        placeholder="Enter a name..."
+                        on:input=update_name
+                        class="w-full rounded-2xl border border-slate-200 px-4 py-3 text-slate-900 shadow-sm outline-none transition focus:border-slate-400 focus:ring-2 focus:ring-slate-200 sm:w-auto"
+                    />
+                    <button type="submit" class="rounded-2xl bg-slate-900 px-6 py-3 text-white transition hover:bg-slate-700">
+                        "Greet"
+                    </button>
+                </form>
+
+                <p class="min-h-[1.5rem] text-center text-slate-600">{ move || greet_msg.get() }</p>
             </div>
-            <p>"Click on the Tauri and Leptos logos to learn more."</p>
-
-            <form class="row" on:submit=greet>
-                <input
-                    id="greet-input"
-                    placeholder="Enter a name..."
-                    on:input=update_name
-                />
-                <button type="submit">"Greet"</button>
-            </form>
-            <p>{ move || greet_msg.get() }</p>
         </main>
     }
 }
